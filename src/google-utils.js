@@ -5,6 +5,7 @@ const open = require('open')
 
 module.exports = {
   getOAuth2Client,
+  getGoogleSheets,
   GoogleSheetsV4Scopes,
 }
 
@@ -110,4 +111,8 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
       resolve(oAuth2Client);
     });
   });
+}
+
+function getGoogleSheets(auth) {
+  return google.sheets({ version: 'v4', auth });
 }

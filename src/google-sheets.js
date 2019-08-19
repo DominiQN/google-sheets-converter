@@ -1,10 +1,4 @@
-const { google } = require('googleapis');
-const { getOAuth2Client, GoogleSheetsV4Scopes } = require(`./google-utils`)
-
-module.exports = {
-  GoogleSheets,
-  GoogleSheetsV4Scopes,
-}
+const { getOAuth2Client, getGoogleSheets, GoogleSheetsV4Scopes } = require(`./google-utils`)
 
 let oAuth2Client;
 let sheets;
@@ -39,7 +33,7 @@ class GoogleSheets {
    *
    * @returns {Promise<Array<string>>}
    */
-  async translate (sheetName, rangeStart, rangeEnd) {
+  async translate(sheetName, rangeStart, rangeEnd) {
     await checkConfig(this.credentialsPath, this.tokenPath);
     const range = convertToA1Notation(sheetName, rangeStart, rangeEnd);
     const res = await sheets.spreadsheets.values.get({
@@ -54,13 +48,14 @@ async function checkConfig(credentialsPath, tokenPath) {
   if (!oAuth2Client) {
     oAuth2Client = await getOAuth2Client({ credentialsPath, tokenPath });
   }
-  sheets = getSheets(oAuth2Client);
-}
-
-function getSheets(auth) {
-  return google.sheets({ version: 'v4', auth });
+  sheets = getGoogleSheets(oAuth2Client);
 }
 
 function convertToA1Notation(sheetName, rangeStart, rangeEnd) {
   return `'${sheetName}'!${rangeStart}:${rangeEnd}`;
+}
+
+module.exports = {
+  GoogleSheets,
+  GoogleSheetsV4Scopes,
 }
