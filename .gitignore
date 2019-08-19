@@ -61,8 +61,8 @@ typings/
 .next
 
 # google credentials
-credentials.json
-token.json
+google-credentials.json
+google-token.json
 
 # vscode
 .vscode
