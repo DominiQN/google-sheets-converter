@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fs = require('fs-extra')
 const chalk = require('chalk');
 const { DEFAULT_CREDENTIALS_PATH, DEFAULT_TOKEN_PATH } = require('./setup');
 const { GoogleSheets } = require(`./google-sheets`);
