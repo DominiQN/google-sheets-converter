@@ -1,7 +1,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
-const open = require('open')
+const open = require('open');
+const chalk = require('chalk');
 
 const GoogleSheetsV4Scopes = {
   SPREADSHEETS_READ_ONLY: 'https://www.googleapis.com/auth/spreadsheets.readonly',
@@ -83,16 +84,16 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
     scope: scopes,
   });
   open(authUrl);
-  console.log('Authorize this app by visiting this url:', authUrl);
+  console.log(chalk.blueBright('\nAuthorize this app by visiting this url:', authUrl));
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question('Enter the code from that page here: ', (code) => {
+  rl.question(chalk.blueBright('Enter the code from that page here: '), (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
-        reject('Error while trying to retrieve access token' + err);
+        reject('while trying to retrieve access token' + err);
       }
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
@@ -100,7 +101,7 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
         if (err) {
           return reject(err);
         }
-        console.log('Token stored to', tokenPath);
+        console.log(chalk.blueBright(`Token stored to ${tokenPath}`));
       });
       resolve(oAuth2Client);
     });
