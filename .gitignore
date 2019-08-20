@@ -66,3 +66,6 @@ google-token.json
 
 # vscode
 .vscode
+
+# configuration for this project
+sheets-config.json

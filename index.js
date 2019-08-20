@@ -1,28 +1,31 @@
-const program = require('commander');
-const homedir = require('os').homedir();
-// const fs = require('fs');
-// const { GoogleSheets } = require(`./src/google-sheets-translator`);
+const commander = require('commander');
+const description = require('./src/constants');
+const { translate } = require('./src/translate');
+const chalk = require('chalk');
 
-program.version('0.0.1', '-v, --version');
+const program = new commander.Command();
 
 program
-  .command('translate [config-path]')
-  .alias('t')
-  .option('--credentials-path <path>', 'google-credentials.json path', `${homedir}/google-credentials.json`)
-  .option('--token-path <path>', 'google-oauth2-token path', `${homedir}/google-auth-token.json`)
-  .action(translate);
+  .version('0.0.1', '-v, --version')
+  .option('-c, --config <path>', description.CONFIG, `${process.cwd()}/sheets-config.json`);
+
+// program
+//   .command('setup', SETUP_DESCRIPTION).alias('c')
+//   .option('-i, --interactive')
+
+console.log(chalk.blueBright('current config path:', program.config));
+
+program
+  .command('translate <sheetName>').alias('t')
+  .description(description.TRANSLATE)
+  .option('--credentials <path>', description.CREDENTIALS)
+  .option('--token <path>', description.TOKEN)
+  .option('-s, --start <range>', description.RANGE_START)
+  .option('-e, --end <range>', description.RANGE_END)
+  .action((sheetName, options) => {
+    translate(sheetName, program.config, options)
+      .then(() => console.log(chalk.blueBright('All data translated')))
+      .catch(error => console.error(error));
+  });
 
 program.parse(process.argv);
-
-function translate(configPath) {
-  console.log(configPath)
-}
-
-// const parser = new GoogleSheetsTranslator(
-//   program.credentialsPath,
-//   program.tokenPath,
-//   '1z6l_8AtyC7qPCeWfQJ4FHjeNp1p_1iPPhXt2WFkk50k'
-// );
-// parser.translate('Trinity', 'A2', 'E')
-//   .then(data => console.log(data))
-//   .catch(err => console.error(err));

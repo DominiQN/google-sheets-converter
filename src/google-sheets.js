@@ -52,6 +52,9 @@ async function checkConfig(credentialsPath, tokenPath) {
 }
 
 function convertToA1Notation(sheetName, rangeStart, rangeEnd) {
+  if (!(rangeStart || rangeEnd)) {
+    return sheetName;
+  }
   return `'${sheetName}'!${rangeStart}:${rangeEnd}`;
 }
 

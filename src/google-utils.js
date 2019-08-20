@@ -3,12 +3,6 @@ const readline = require('readline');
 const { google } = require('googleapis');
 const open = require('open')
 
-module.exports = {
-  getOAuth2Client,
-  getGoogleSheets,
-  GoogleSheetsV4Scopes,
-}
-
 const GoogleSheetsV4Scopes = {
   SPREADSHEETS_READ_ONLY: 'https://www.googleapis.com/auth/spreadsheets.readonly',
   SPREADSHEETS_ALL: 'https://www.googleapis.com/auth/spreadsheets',
@@ -115,4 +109,10 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
 
 function getGoogleSheets(auth) {
   return google.sheets({ version: 'v4', auth });
+}
+
+module.exports = {
+  getOAuth2Client,
+  getGoogleSheets,
+  GoogleSheetsV4Scopes,
 }
