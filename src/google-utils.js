@@ -2,7 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 const open = require('open');
-const chalk = require('chalk');
+const chalk = require('./common-utils');
 
 const GoogleSheetsV4Scopes = {
   SPREADSHEETS_READ_ONLY: 'https://www.googleapis.com/auth/spreadsheets.readonly',
@@ -84,12 +84,12 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
     scope: scopes,
   });
   open(authUrl);
-  console.log(chalk.blueBright('\nAuthorize this app by visiting this url:', authUrl));
+  console.log(chalk('\nAuthorize this app by visiting this url:', authUrl));
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
-  rl.question(chalk.blueBright('Enter the code from that page here: '), (code) => {
+  rl.question(chalk('Enter the code from that page here: '), (code) => {
     rl.close();
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
@@ -101,7 +101,7 @@ function getNewToken(oAuth2Client, tokenPath, scopes, resolve, reject) {
         if (err) {
           return reject(err);
         }
-        console.log(chalk.blueBright(`Token stored to ${tokenPath}`));
+        console.log(chalk(`Token stored to ${tokenPath}`));
       });
       resolve(oAuth2Client);
     });

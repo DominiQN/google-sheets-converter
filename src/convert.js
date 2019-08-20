@@ -1,5 +1,5 @@
 const fs = require('fs-extra')
-const chalk = require('chalk');
+const { chalk } = require('./common-utils');
 const { DEFAULT_CREDENTIALS_PATH, DEFAULT_TOKEN_PATH } = require('./setup');
 const { GoogleSheets } = require(`./google-sheets`);
 
@@ -17,8 +17,8 @@ async function getGoogleSheets(configPath, options) {
   const credentialsPath = options.credentials || config.credentialsPath || DEFAULT_CREDENTIALS_PATH;
   const tokenPath = options.token || config.tokenPath || DEFAULT_TOKEN_PATH;
 
-  console.log(chalk.blueBright(`credentials path: '${credentialsPath}'`));
-  console.log(chalk.blueBright(`token path: '${tokenPath}'`));
+  console.log(chalk(`credentials path: '${credentialsPath}'`));
+  console.log(chalk(`token path: '${tokenPath}'`));
 
   const sheets = new GoogleSheets(credentialsPath, tokenPath, config.spreadsheetId);
   return sheets;
@@ -30,7 +30,7 @@ async function getConfig(configPath) {
   }
   const configStr = await fs.readFile(configPath)
     .catch(() => {
-      console.warn(chalk.yellow(`Config file not exists. path: '${configPath}'`), );
+      console.warn(chalk(`Config file not exists. path: '${configPath}'`), );
       process.exit(1);
     });
 
@@ -47,10 +47,10 @@ async function convertSheetsDataToFileString(rows) {
   const KEY = 1;
   const LANGUAGE_START_COL = 3;
   const colNames = rows[0]
-  console.log(chalk.blueBright('columns'), colNames);
+  console.log(chalk('columns'), colNames);
 
   const languages = colNames.slice(LANGUAGE_START_COL);
-  console.log(chalk.blueBright('languages'), languages);
+  console.log(chalk('languages'), languages);
 
   const sortedRows = rows.slice(1).sort((a, b) => {
     if (a[0] < b[0]) {
@@ -106,8 +106,9 @@ async function convertSheetsDataToFileString(rows) {
 }
 
 async function writeFile(fileStringList) {
+  //TODO: progress
   for (let f of fileStringList) {
-    console.log(chalk.blueBright(await f.write()));
+    console.log(chalk(await f.write()));
   }
 }
 

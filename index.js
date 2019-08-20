@@ -1,7 +1,7 @@
 const commander = require('commander');
 const description = require('./src/constants');
 const { convert } = require('./src/convert');
-const chalk = require('chalk');
+const { chalk } = require('./src/common-utils');
 
 const program = new commander.Command();
 
@@ -13,7 +13,6 @@ program
 //   .command('setup', SETUP_DESCRIPTION).alias('c')
 //   .option('-i, --interactive')
 
-console.log(chalk.blueBright('current config path:', program.config));
 
 program
   .command('convert <sheetName>').alias('ct')
@@ -24,7 +23,7 @@ program
   .option('-e, --end <range>', description.RANGE_END)
   .action((sheetName, options) => {
     convert(sheetName, program.config, options)
-      .then(() => console.log(chalk.blueBright('All data translated')))
+      .then(() => console.log(chalk('All data translated')))
       .catch(error => console.error(error));
   });
 
