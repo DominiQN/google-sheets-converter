@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/DominiQN/i18n-translator.git"
   },
-  "author": "DominiQN",
+  "author": {
+    "name": "Dongmin Nam",
+    "email": "dmut7691@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/DominiQN/i18n-translator/issues"
