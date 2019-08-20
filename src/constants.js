@@ -1,5 +1,5 @@
 module.exports = {
-  TRANSLATE: `Configuration path for google sheets. The name must be 'sheets-config.json'. Option priority: flags > config file > default`,
+  CONVERT: `Configuration path for google sheets. The name must be 'sheets-config.json'. Option priority: flags > config file > default`,
   CREDENTIALS: 'google-credentials.json path. default path is home directory of the current user',
   TOKEN: 'google-oauth2-token path. If not exists, a new token from google oauth will be saved this path. default path is home directory of the current user',
   CONFIG: 'set config path. defaults to ./sheets-config.json',

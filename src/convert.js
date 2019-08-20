@@ -5,7 +5,7 @@ const { GoogleSheets } = require(`./google-sheets`);
 
 let _config;
 
-exports.translate = async function(sheetName, configPath, options) {
+exports.convert = async function convert(sheetName, configPath, options) {
   const sheets = await getGoogleSheets(configPath, options);
   const rows = await sheets.translate(sheetName, options.start, options.end);
   const fileStringList = await convertSheetsDataToFileString(rows);
