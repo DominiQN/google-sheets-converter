@@ -1,4 +1,4 @@
-# i18n-translator
+# google-sheets-converter
 
 ## Get google credentials
 
