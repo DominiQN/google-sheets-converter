@@ -36,7 +36,7 @@ program
   .description(description.SETUP)
   .action((options) => {
     setup()
-      .then(() => console.log(chalk('Setup completed')))
+      .then((configPath) => console.log(chalk(`successfully created. ${configPath}`)))
       .catch(error => console.error(error))
   })
 
