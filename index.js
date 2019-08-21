@@ -10,7 +10,6 @@ const program = new commander.Command();
 
 program
   .version('v0.0.1', '-v, --version')
-  .option('-c, --config [path]', description.CONFIG, `${process.cwd()}/${CONFIG_FILE_NAME}`)
   .action(() => {
     process.exit(0);
   });
@@ -35,7 +34,7 @@ program
   .command('setup')
   .description(description.SETUP)
   .action((options) => {
-    setup(options)
+    setup()
       .then(() => console.log(chalk('Setup completed')))
       .catch(error => console.error(error))
   })
@@ -43,6 +42,5 @@ program
 program.parse(process.argv);
 
 if (program.args.length === 0) {
-  console.log(chalk('current config path:', program.config));
   process.exit(0);
 }
