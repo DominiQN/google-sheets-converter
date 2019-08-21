@@ -1,14 +1,17 @@
 {
-  "name": "i18n-translator",
+  "name": "google-sheets-converter",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "gsc": "./index.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DominiQN/i18n-translator.git"
+    "url": "git+https://github.com/DominiQN/google-sheets-converter.git"
   },
   "author": {
     "name": "Dongmin Nam",
@@ -16,9 +19,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DominiQN/i18n-translator/issues"
+    "url": "https://github.com/DominiQN/google-sheets-converter/issues"
   },
-  "homepage": "https://github.com/DominiQN/i18n-translator#readme",
+  "homepage": "https://github.com/DominiQN/google-sheets-converter#readme",
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
