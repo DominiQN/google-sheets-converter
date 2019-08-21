@@ -5,4 +5,5 @@ module.exports = {
   CONFIG: 'set config path. defaults to ./sheets-config.json',
   RANGE_START: `set starting range like 'A1', or 'F'. If using ranges, it must be used with the '-e(--end)' option. see https://developers.google.com/sheets/guides/concepts#a1`,
   RANGE_END: `set ending range like 'F1', or 'G'. If using ranges, it must be used with the '-s(--start)' option. see https://developers.google.com/sheets/guides/concepts#a1`,
+  SETUP: `make configuration file. default name is 'sheets-config.json'`,
 }

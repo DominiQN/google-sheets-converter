@@ -2,7 +2,7 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 const open = require('open');
-const chalk = require('./common-utils');
+const { chalk } = require('./common-utils');
 
 const GoogleSheetsV4Scopes = {
   SPREADSHEETS_READ_ONLY: 'https://www.googleapis.com/auth/spreadsheets.readonly',
@@ -40,6 +40,7 @@ async function getOAuth2Client(options = {}) {
 
 // Load client secrets from a local file.
 function getCredentials(credentialsPath) {
+  console.log(chalk(`read credentials from ${credentialsPath}`))
   return new Promise((resolve, reject) => {
     fs.readFile(credentialsPath, (error, content) => {
       if (error) {

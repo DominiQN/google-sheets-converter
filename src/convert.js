@@ -1,13 +1,16 @@
-const fs = require('fs-extra')
-const { chalk } = require('./common-utils');
-const { DEFAULT_CREDENTIALS_PATH, DEFAULT_TOKEN_PATH } = require('./setup');
+const fs = require('fs-extra');
+const { chalk, prettifyDirectoryPath } = require('./common-utils');
+const {
+  DEFAULT_CREDENTIALS_PATH,
+  DEFAULT_TOKEN_PATH,
+} = require('./setup');
 const { GoogleSheets } = require(`./google-sheets`);
 
 let _config;
 
 exports.convert = async function convert(sheetName, configPath, options) {
   const sheets = await getGoogleSheets(configPath, options);
-  const rows = await sheets.translate(sheetName, options.start, options.end);
+  const rows = await sheets.convert(sheetName, options.start, options.end);
   const fileStringList = await convertSheetsDataToFileString(rows);
   await writeFile(fileStringList);
 }
@@ -126,16 +129,4 @@ class FileString {
     await fs.writeFile(`${this.filePath}/${this.fileName}`, this.fileString);
     return filePath;
   }
-}
-
-/**
- * Remove end character '/' or '\\' of given file path, and trim.
- * @param {string} filePath
- * @returns {string}
- */
-function prettifyDirectoryPath(filePath) {
-  if (filePath.endsWith('/') || filePath.endsWith(`\\`)) {
-    return filePath.slice(0, -1).trim();
-  }
-  return filePath.trim();
 }

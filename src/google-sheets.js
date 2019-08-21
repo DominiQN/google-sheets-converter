@@ -1,4 +1,9 @@
-const { getOAuth2Client, getGoogleSheets, GoogleSheetsV4Scopes } = require(`./google-utils`)
+const { getOAuth2Client, getGoogleSheets, GoogleSheetsV4Scopes } = require(`./google-utils`);
+const { prettifyDirectoryPath } = require('./common-utils')
+const {
+  GOOGLE_CREDENTIALS_FILE_NAME,
+  GOOGLE_OAUTH2_TOKEN_FILE_NAME,
+} = require('./setup');
 
 let oAuth2Client;
 let sheets;
@@ -19,8 +24,8 @@ class GoogleSheets {
     if (!spreadsheetId) {
       throw Error(`Error required spreadsheet id, input: ${spreadsheetId}`)
     }
-    this.credentialsPath = credentialsPath;
-    this.tokenPath = tokenPath;
+    this.credentialsPath = `${prettifyDirectoryPath(credentialsPath)}/${GOOGLE_CREDENTIALS_FILE_NAME}`;
+    this.tokenPath = `${prettifyDirectoryPath(tokenPath)}/${GOOGLE_OAUTH2_TOKEN_FILE_NAME}`;
     this.spreadsheetId = spreadsheetId;
   }
 
@@ -33,7 +38,7 @@ class GoogleSheets {
    *
    * @returns {Promise<Array<string>>}
    */
-  async translate(sheetName, rangeStart, rangeEnd) {
+  async convert(sheetName, rangeStart, rangeEnd) {
     await checkConfig(this.credentialsPath, this.tokenPath);
     const range = convertToA1Notation(sheetName, rangeStart, rangeEnd);
     const res = await sheets.spreadsheets.values.get({
