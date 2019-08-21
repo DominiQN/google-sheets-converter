@@ -10,7 +10,7 @@ const program = new commander.Command();
 
 program
   .version('v0.0.1', '-v, --version')
-  .option('-c, --config <path>', description.CONFIG, `${process.cwd()}/${CONFIG_FILE_NAME}`)
+  .option('-c, --config [path]', description.CONFIG, `${process.cwd()}/${CONFIG_FILE_NAME}`)
   .action(() => {
     process.exit(0);
   });
