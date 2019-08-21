@@ -1,11 +1,12 @@
 # google-sheets-converter
 
-## Get google credentials
+## 1. Get google credentials
 
 - see this
   - https://console.developers.google.com/apis
+- make sure that file named **'google-credentials.json'**
 
-## setup
+## 2. setup
 
 ```
 $ gsc setup
@@ -17,6 +18,27 @@ Directory path to save google oauth2 token (default: home dir of os, file name: 
 Destination directory path: /path/your/dest/path
 successfully created. /your/config/path/sheets-config.json
 ```
+
+## 3. convert
+
+```
+$ gsc convert <sheet-name>
+$ gsc cvt <sheet-name>
+```
+```
+$ gsc cvt <sheet-name>
+credentials path: '/your/credentials/path'
+token path: '/your/path/to/save/token'
+read credentials from /your/credentials/path/google-credentials.json
+
+Authorize this app by visiting this url: ...
+Enter the code from that page here: ********************
+
+Token stored to /your/path/to/save/token/google-oauth2-token.json
+
+...
+```
+
 
 ## reference
 
