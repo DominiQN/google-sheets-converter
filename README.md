@@ -1,5 +1,12 @@
 # google-sheets-converter
 
+## install
+
+```
+npm install -g https://github.com/DominiQN/google-sheets-converter/tarball/v0.0.1
+
+```
+
 ## 1. Get google credentials
 
 - see this
