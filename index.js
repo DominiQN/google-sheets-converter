@@ -3,8 +3,8 @@
 const commander = require('commander');
 const description = require('./lib/constants');
 const { convert } = require('./lib/convert');
-const { setup, CONFIG_FILE_NAME } = require('./lib/setup');
-const { chalk } = require('./lib/common-utils');
+const { setup } = require('./lib/setup');
+const { chalk, homedir } = require('./lib/common-utils');
 
 const program = new commander.Command();
 
@@ -17,12 +17,13 @@ program
 program
   .command('convert <sheetName>').alias('cvt')
   .description(description.CONVERT)
+  .option('--config <path>', description.CONFIG, homedir)
   .option('--credentials <path>', description.CREDENTIALS)
   .option('--token <path>', description.TOKEN)
   .option('-s, --start <range>', description.RANGE_START)
   .option('-e, --end <range>', description.RANGE_END)
   .action((sheetName, options) => {
-    convert(sheetName, program.config, options)
+    convert(sheetName, options)
       .then(() => {
         console.log(chalk('All data translated'));
         process.exit(0);
