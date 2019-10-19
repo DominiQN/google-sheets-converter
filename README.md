@@ -1,19 +1,21 @@
 # google-sheets-converter
 
-## install
+
+
+## Installation
 
 ```
 npm install -g https://github.com/DominiQN/google-sheets-converter/tarball/v0.0.1
 
 ```
 
-## 1. Get google credentials
+## Get google credentials
 
 - see this
   - https://console.developers.google.com/apis
 - make sure that file named **'google-credentials.json'**
 
-## 2. setup
+## Setup
 
 ```
 $ gsc setup
@@ -26,7 +28,7 @@ Destination directory path: /path/your/dest/path
 successfully created. /your/config/path/sheets-config.json
 ```
 
-## 3. convert
+## Convert
 
 ```
 $ gsc convert <sheet-name>
@@ -47,6 +49,6 @@ Token stored to /your/path/to/save/token/google-oauth2-token.json
 ```
 
 
-## reference
+## Reference
 
 - https://www.popit.kr/%EB%82%98%EB%A7%8C%EC%9D%98-cli-%EB%A7%8C%EB%93%A4%EA%B8%B0/
